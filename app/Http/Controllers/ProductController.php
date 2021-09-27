@@ -15,7 +15,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function lists()
     {
         // return lists of user products
         return Product::where(['user_id' => Auth::id()])->get();

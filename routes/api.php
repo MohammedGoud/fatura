@@ -20,10 +20,10 @@ use App\Http\Controllers\ProductController;
 Route::post('login', [AuthController::class, 'authenticate']);
 Route::post('register', [AuthController::class, 'register']);
 
-Route::group(['middleware' => ['jwt.verify']], function () {
-    Route::get('logout', [AuthController::class, 'logout']);
+Route::group(['middleware' => ['jwt.verify'] , 'group' => 'products' ], function () {
+    Route::get('logout', [AuthController::class, 'logout']  );
     Route::get('get_user', [AuthController::class, 'get_user']);
-    Route::get('products', [ProductController::class, 'index']);
+    Route::get('products', [ProductController::class, 'lists' ]  );
     Route::get('products/{id}', [ProductController::class, 'show']);
     Route::post('products', [ProductController::class, 'store']);
     Route::put('update/{product}', [ProductController::class, 'update']);
