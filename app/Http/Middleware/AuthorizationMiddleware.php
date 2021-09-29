@@ -8,7 +8,7 @@ use App\Services\PermissionManager;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Support\Facades\Route;
 
-class AutherizationMiddleware
+class AuthorizationMiddleware
 {
     /**
      * Handle an incoming request.

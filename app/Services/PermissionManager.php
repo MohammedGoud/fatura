@@ -72,7 +72,7 @@ class PermissionManager
 
         $user = auth()->user();
         // All permissions and Roles
-        if ($user->role->permissions) {
+        if (isset($user->role->permissions)) {
             $permission_roles = array_merge(json_decode($user->role->permissions), json_decode($user->permissions));
             return $permission_roles ?? [];
         }

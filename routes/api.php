@@ -20,7 +20,7 @@ Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::get('permissions', [RoleController::class, 'list_system_permissions']);
 
-Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'group' => 'products'], function () {
+Route::group(['middleware' => ['checkAuthentication', 'checkAuthorization'], 'group' => 'products'], function () {
     Route::get('products', [ProductController::class, 'lists']);
     Route::get('products/{id}', [ProductController::class, 'show']);
     Route::post('products', [ProductController::class, 'store']);
@@ -28,12 +28,12 @@ Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'gr
     Route::delete('delete/{product}', [ProductController::class, 'delete']);
 });
 
-Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'group' => 'users'], function () {
-    Route::get('logout', [UserController::class, 'logout']);
+Route::group(['middleware' => ['checkAuthentication', 'checkAuthorization'], 'group' => 'users'], function () {
+    Route::post('logout', [UserController::class, 'logout']);
     Route::get('profile', [UserController::class, 'profile']);
 });
 
-Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'group' => 'roles'], function () {
+Route::group(['middleware' => ['checkAuthentication', 'checkAuthorization'], 'group' => 'roles'], function () {
     Route::get('roles', [RoleController::class, 'lists']);
     Route::post('roles', [RoleController::class, 'store']);
 });
