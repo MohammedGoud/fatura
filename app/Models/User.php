@@ -21,7 +21,7 @@ class User extends Authenticatable implements JWTSubject
         'name',
         'email',
         'password',
-        'permissions'
+        'permissions',
     ];
 
     /**
@@ -43,9 +43,9 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
-    public function permissions()
+    public function role()
     {
-        return $this->belongsTo(Permission::class, 'roles_permissions');
+        return $this->hasOne(Role::class);
     }
 
     public function getJWTIdentifier()
@@ -55,9 +55,5 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
-    }
-    public function products()
-    {
-        return $this->hasMany(Product::class, 'user_id');
     }
 }

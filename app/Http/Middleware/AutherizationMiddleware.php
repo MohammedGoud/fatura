@@ -19,7 +19,7 @@ class AutherizationMiddleware
      */
     public function handle($request, Closure $next)
     {
-
+        // check if not authenticated!
         if (auth()->check() == false) {
             return response()->json([
                 'success' => false,
@@ -27,9 +27,10 @@ class AutherizationMiddleware
             ]);
         }
 
+        // get route access, to check if have authorized to access resourcce or not
         $group       = $request->route()->getAction()['group'];
         $method      = $request->route()->getActionMethod();
-        $permisssion = $method . '-' . $group;
+        $permisssion = $group . '-' . $method;
 
         if ((new PermissionManager)->isUserCannot($permisssion)) {
             return response()->json([

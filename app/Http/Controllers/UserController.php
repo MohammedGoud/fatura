@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -12,17 +13,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
-
-    public function get_system_permissions()
-    {
-        $permissions = (new PermissionManager)->getSystemPermissions();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Permission Reterived successfully',
-            'data'    => $permissions,
-        ], Response::HTTP_OK);
-    }
 
     public function register(Request $request)
     {
@@ -132,4 +122,5 @@ class UserController extends Controller
 
         return response()->json(['user' => $user]);
     }
+
 }

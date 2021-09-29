@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 
@@ -17,7 +18,7 @@ use App\Http\Controllers\ProductController;
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
-Route::get('permissions', [UserController::class, 'get_system_permissions']);
+Route::get('permissions', [RoleController::class, 'list_system_permissions']);
 
 Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'group' => 'products'], function () {
     Route::get('products', [ProductController::class, 'lists']);
@@ -30,4 +31,9 @@ Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'gr
 Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'group' => 'users'], function () {
     Route::get('logout', [UserController::class, 'logout']);
     Route::get('profile', [UserController::class, 'profile']);
+});
+
+Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'group' => 'roles'], function () {
+    Route::get('roles', [RoleController::class, 'lists']);
+    Route::post('roles', [RoleController::class, 'store']);
 });
