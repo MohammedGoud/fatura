@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 
 /*
@@ -16,16 +15,19 @@ use App\Http\Controllers\ProductController;
 |
  */
 
+Route::post('login', [UserController::class, 'login']);
+Route::post('register', [UserController::class, 'register']);
+Route::get('permissions', [UserController::class, 'get_system_permissions']);
 
-Route::post('login', [AuthController::class, 'authenticate']);
-Route::post('register', [AuthController::class, 'register']);
-
-Route::group(['middleware' => ['jwt.verify'] , 'group' => 'products' ], function () {
-    Route::get('logout', [AuthController::class, 'logout']  );
-    Route::get('get_user', [AuthController::class, 'get_user']);
-    Route::get('products', [ProductController::class, 'lists' ]  );
+Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'group' => 'products'], function () {
+    Route::get('products', [ProductController::class, 'lists']);
     Route::get('products/{id}', [ProductController::class, 'show']);
     Route::post('products', [ProductController::class, 'store']);
     Route::put('update/{product}', [ProductController::class, 'update']);
-    Route::delete('delete/{product}', [ProductController::class, 'destroy']);
+    Route::delete('delete/{product}', [ProductController::class, 'delete']);
+});
+
+Route::group(['middleware' => ['checkAuthentication', 'checkAutherization'], 'group' => 'users'], function () {
+    Route::get('logout', [UserController::class, 'logout']);
+    Route::get('profile', [UserController::class, 'profile']);
 });

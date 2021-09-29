@@ -54,17 +54,18 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth'             => \App\Http\Middleware\Authenticate::class,
-        'auth.basic'       => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'cache.headers'    => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can'              => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest'            => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed'           => \Illuminate\Routing\Middleware\ValidateSignature::class,
-        'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'jwt.verify'       => \App\Http\Middleware\AuthMiddleware::class,
-        'jwt.auth'         => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
-        'jwt.refresh'      => 'Tymon\JWTAuth\Middleware\RefreshToken',
+        'auth'                => \App\Http\Middleware\Authenticate::class,
+        'auth.basic'          => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'cache.headers'       => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can'                 => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest'               => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'password.confirm'    => \Illuminate\Auth\Middleware\RequirePassword::class,
+        'signed'              => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle'            => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified'            => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'checkAuthentication' => \App\Http\Middleware\AuthenticationMiddleware::class,
+        'checkAutherization'  => \App\Http\Middleware\AutherizationMiddleware::class,
+        'jwt.auth'            => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
+        'jwt.refresh'         => 'Tymon\JWTAuth\Middleware\RefreshToken',
     ];
 }

@@ -5,12 +5,25 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
+use App\Services\PermissionManager;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthController extends Controller
+class UserController extends Controller
 {
+
+    public function get_system_permissions()
+    {
+        $permissions = (new PermissionManager)->getSystemPermissions();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Permission Reterived successfully',
+            'data'    => $permissions,
+        ], Response::HTTP_OK);
+    }
+
     public function register(Request $request)
     {
         //Validate data
@@ -28,9 +41,10 @@ class AuthController extends Controller
 
         //Request is valid, create new user
         $user = User::create([
-            'name'     => $request->name,
-            'email'    => $request->email,
-            'password' => bcrypt($request->password),
+            'name'        => $request->name,
+            'email'       => $request->email,
+            'password'    => bcrypt($request->password),
+            'permissions' => json_encode($request->permissions),
         ]);
 
         //User created, return success response
@@ -41,7 +55,7 @@ class AuthController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function authenticate(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
 
@@ -108,7 +122,7 @@ class AuthController extends Controller
         }
     }
 
-    public function get_user(Request $request)
+    public function profile(Request $request)
     {
         $this->validate($request, [
             'token' => 'required',

@@ -6,9 +6,8 @@ use Closure;
 use Exception;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Illuminate\Support\Facades\Route;
 
-class AuthMiddleware
+class AuthenticationMiddleware
 {
     /**
      * Handle an incoming request.
@@ -19,10 +18,6 @@ class AuthMiddleware
      */
     public function handle($request, Closure $next)
     {
-
-        $group       = $request->route()->getAction()['group'];
-        $method      = $request->route()->getActionMethod();
-        $permisssion = $group . '-' . $method;
         try {
             $user = JWTAuth::parseToken()->authenticate();
 
