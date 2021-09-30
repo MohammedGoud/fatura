@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Role;
+use App\Services\PermissionManager;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class RoleFactory extends Factory
@@ -22,7 +23,9 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'              => $this->faker->name(),
+            'slug'             => $this->faker->name(),
+            'permissions'       => json_encode((new PermissionManager)->getSystemPermissions()),
         ];
     }
 }
