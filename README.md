@@ -10,13 +10,13 @@
 
 ## How It's Work
 
--** Project work based laravel framework.
+-   Project work based laravel framework.
 
--**  It's uses JWT package for auhtentication and provide token for it. and use middleware "AuthenticationMiddleware".
+-   It's uses JWT package for auhtentication and provide token for it. and use middleware "AuthenticationMiddleware".
 
--- ** Using services App\Services\PermissionManager, Class for control user permissions and role. check user can or not do this action.
+-   Using services App\Services\PermissionManager, Class for control user permissions and role. check user can or not do this action.
 
--- ** User may have permissions and role , role have a set of permissions .
+-   User may have permissions and role , role have a set of permissions .
 in Middleware we merge both to check user have ability to do action or not.
 
 
@@ -52,14 +52,14 @@ permissions or role assign to user also verify accessabilty to resouces.
 
     
 
--** Also use Routing system to check user authorized to access the resource or not, and use middleware "AuthorizationMiddleware".
+-  Also use Routing system to check user authorized to access the resource or not, and use middleware "AuthorizationMiddleware".
 
 ## Units Tests
-** **- Four Unit Tests
-1- for unauthenticated users.
-2- for unauthorized users
-3- for invalid tokens.
-4- for happy scenario 'add product successfully'
+**  Four Unit Tests
+-  for unauthenticated users.
+-  for unauthorized users
+-  for invalid tokens.
+-  for happy scenario 'add product successfully'
 
 
     
