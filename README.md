@@ -66,6 +66,8 @@ permissions or role assign to user also verify accessabilty to resouces.
 1- Writing more unit test cases.
 2- Move Requests of APIs from controller to external requests.
 3- Add Transformer Response.
+4- May be change the structure of database
+create permission -  user_permissions - roles_permissions 
 
 
 
