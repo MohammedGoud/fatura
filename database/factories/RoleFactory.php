@@ -23,9 +23,9 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            'name'              => $this->faker->name(),
-            'slug'             => $this->faker->name(),
-            'permissions'       => json_encode((new PermissionManager)->getSystemPermissions()),
+            'name'        => $this->faker->name(),
+            'slug'        => $this->faker->name(),
+            'permissions' => json_encode((new PermissionManager)->getSystemPermissions()),
         ];
     }
 }

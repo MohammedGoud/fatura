@@ -6,7 +6,7 @@ use Tests\TestCase;
 use App\Models\User;
 use App\Models\Product;
 
-class AuthenticationTest extends TestCase
+class SampleTest extends TestCase
 {
     /**
      * A test example to make sure authentication working.

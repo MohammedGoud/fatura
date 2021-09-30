@@ -14,6 +14,12 @@
 
 -**  It's uses JWT package for auhtentication and provide token for it. and use middleware "AuthenticationMiddleware".
 
+-- ** Using services App\Services\PermissionManager, Class for control user permissions and role. check user can or not do this action.
+
+-- ** User may have permissions and role , role have a set of permissions .
+in Middleware we merge both to check user have ability to do action or not.
+
+
 1- I can create user with following request data 
 URL : http://127.0.0.1:8080/api/register
 {
